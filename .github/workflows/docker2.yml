@@ -1,4 +1,4 @@
-Canvas name: Build and push Docker image (amd64, arm64 to hub.docker.com)
+name: Build and push Docker image (amd64, arm64 to hub.docker.com)
 
 on:
   workflow_dispatch: # allow manual trigger
