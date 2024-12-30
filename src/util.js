@@ -115,10 +115,9 @@ export const notify = html => new Promise((resolve, reject) => {
     if (cfg.debug) console.debug('notify: NOTIFY is not set!');
     return resolve();
   }
-  // const cmd = `apprise '${cfg.notify}' ${title} -i html -b '${html}'`; // this had problems if e.g. ' was used in arg; could have `npm i shell-escape`, but instead using safer execFile which takes args as array instead of exec which spawned a shell to execute the command
-  const args = [cfg.notify, '-i', 'html', '-b', `'${html}'`];
+  const args = [cfg.notify, '-i', 'html', '-b', html];
   if (cfg.notify_title) args.push(...['-t', cfg.notify_title]);
-  if (cfg.debug) console.debug(`apprise ${args.map(a => `'${a}'`).join(' ')}`); // this also doesn't escape, but it's just for info
+  if (cfg.debug) console.debug(`apprise ${args.map(a => `'${a}'`).join(' ')}`);
   execFile('apprise', args, (error, stdout, stderr) => {
     if (error) {
       console.log(`error: ${error.message}`);
@@ -131,6 +130,8 @@ export const notify = html => new Promise((resolve, reject) => {
     if (stdout) console.log(`stdout: ${stdout}`);
     resolve();
   });
+});
+
 });
 
 export const escapeHtml = unsafe => unsafe.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll('\'', '&#039;');
