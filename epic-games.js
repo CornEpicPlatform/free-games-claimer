@@ -40,7 +40,7 @@ const context = await firefox.launchPersistentContext(cfg.dir.browser, {
     // '-kiosk',
   ],
   proxy: {
-    server: 'socks5://129.148.24.141:10814',
+    server: 'http://129.148.24.141:20814', // Change to HTTP or HTTPS proxy
     username: 'cym31152',
     password: 'cccc1111'
   }
